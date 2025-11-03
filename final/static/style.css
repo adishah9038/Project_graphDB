@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar h2,
+.sidebar h3 {
+    margin: 10px 0;
+}
+
+.sidebar input,
+.sidebar button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+}
+
+.sidebar button {
+    background: #16a085;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    background: #1abc9c;
+}
+
+/* Main content */
+.main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#output {
+    white-space: pre-wrap;
+}
+
+/* Q/A box */
+.qa-box {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.qa-box h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Messages area */
+.qa-messages {
+    flex: 1;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding-right: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Individual message bubbles */
+.message {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    word-wrap: break-word;
+    max-width: 80%;
+}
+
+/* System (bot) messages */
+.message.system {
+    align-self: flex-start;
+    background: #ecf0f1;
+    color: #2c3e50;
+}
+
+/* User messages with lighter background */
+.message.user {
+    align-self: flex-end;
+    background: #d1f0ff; /* light blue */
+    color: #2c3e50;
+}
+
+/* Input area */
+.qa-input {
+    display: flex;
+    gap: 10px;
+}
+
+.qa-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.qa-input button {
+    padding: 10px 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.qa-input button:hover {
+    background: #2980b9;
+}

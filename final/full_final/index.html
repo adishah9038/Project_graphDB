@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLite to Neo4j Graph Builder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-project-diagram"></i> SQLite to Neo4j Graph Builder</h1>
+            <p>Convert your SQLite databases into Neo4j knowledge graphs</p>
+        </header>
+
+        <div class="main-layout">
+            <!-- Left Sidebar -->
+            <div class="sidebar">
+                <div class="section">
+                    <h3><i class="fas fa-database"></i> 1. Upload SQLite</h3>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload or drag & drop</p>
+                        <input type="file" id="sqliteFile" accept=".sqlite,.db" style="display: none;">
+                    </div>
+                    <div class="file-info" id="fileInfo" style="display: none;"></div>
+                </div>
+
+                <div class="section">
+                    <h3><i class="fas fa-sitemap"></i> 2. Generate ERD</h3>
+                    <button class="btn btn-primary" id="generateERD" disabled>
+                        <i class="fas fa-cogs"></i> Generate ERD
+                    </button>
+                </div>
+
+                <div class="section">
+                    <h3><i class="fas fa-brain"></i> 3. Schema Modeling</h3>
+                    <button class="btn btn-primary" id="generateSchema" disabled>
+                        <i class="fas fa-magic"></i> Generate Graph Schema
+                    </button>
+                </div>
+
+                <div class="section">
+                    <h3><i class="fas fa-plug"></i> 4. Neo4j Connection</h3>
+                    <div class="form-group">
+                        <label for="neo4jUri">URI:</label>
+                        <input type="text" id="neo4jUri" placeholder="neo4j+s://your-instance.databases.neo4j.io">
+                    </div>
+                    <div class="form-group">
+                        <label for="neo4jUsername">Username:</label>
+                        <input type="text" id="neo4jUsername" placeholder="neo4j">
+                    </div>
+                    <div class="form-group">
+                        <label for="neo4jPassword">Password:</label>
+                        <input type="password" id="neo4jPassword" placeholder="Your password">
+                    </div>
+                    <button class="btn btn-secondary" id="connectNeo4j">
+                        <i class="fas fa-link"></i> Connect
+                    </button>
+                </div>
+
+                <div class="section">
+                    <h3><i class="fas fa-upload"></i> 5. Inject Data</h3>
+                    <button class="btn btn-success" id="injectNodes" disabled>
+                        <i class="fas fa-circle"></i> Inject Nodes
+                    </button>
+                    <button class="btn btn-success" id="injectRelations" disabled>
+                        <i class="fas fa-arrows-alt"></i> Inject Relations
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="content">
+                <div class="tab-container">
+                    <div class="tabs">
+                        <button class="tab-button active" data-tab="welcome">
+                            <i class="fas fa-home"></i> Welcome
+                        </button>
+                        <button class="tab-button" data-tab="erd">
+                            <i class="fas fa-sitemap"></i> ERD
+                        </button>
+                        <button class="tab-button" data-tab="schema">
+                            <i class="fas fa-project-diagram"></i> Schema
+                        </button>
+                        <button class="tab-button" data-tab="qa">
+                            <i class="fas fa-comments"></i> Q&A System
+                        </button>
+                    </div>
+
+                    <div class="tab-content">
+                        <!-- Welcome Tab -->
+                        <div id="welcome" class="tab-panel active">
+                            <div class="welcome-content">
+                                <div class="hero-section">
+                                    <i class="fas fa-rocket"></i>
+                                    <h2>Transform Your SQLite Data into Knowledge Graphs</h2>
+                                    <p>Follow the steps in the sidebar to convert your SQLite database into a powerful Neo4j graph database.</p>
+                                </div>
+                                
+                                <div class="features-grid">
+                                    <div class="feature-card">
+                                        <i class="fas fa-database"></i>
+                                        <h3>SQLite Import</h3>
+                                        <p>Upload your SQLite database files with ease</p>
+                                    </div>
+                                    <div class="feature-card">
+                                        <i class="fas fa-magic"></i>
+                                        <h3>AI-Powered Modeling</h3>
+                                        <p>Automatic schema generation using advanced AI</p>
+                                    </div>
+                                    <div class="feature-card">
+                                        <i class="fas fa-project-diagram"></i>
+                                        <h3>Graph Visualization</h3>
+                                        <p>Interactive visualization of your data relationships</p>
+                                    </div>
+                                    <div class="feature-card">
+                                        <i class="fas fa-comments"></i>
+                                        <h3>Natural Language Queries</h3>
+                                        <p>Ask questions in plain English about your data</p>
+                                    </div>
+                                </div>
+
+                                <div class="status-panel">
+                                    <h3><i class="fas fa-info-circle"></i> Status</h3>
+                                    <div id="statusList">
+                                        <div class="status-item">
+                                            <i class="fas fa-circle text-gray"></i>
+                                            <span>SQLite file upload</span>
+                                        </div>
+                                        <div class="status-item">
+                                            <i class="fas fa-circle text-gray"></i>
+                                            <span>ERD generation</span>
+                                        </div>
+                                        <div class="status-item">
+                                            <i class="fas fa-circle text-gray"></i>
+                                            <span>Schema modeling</span>
+                                        </div>
+                                        <div class="status-item">
+                                            <i class="fas fa-circle text-gray"></i>
+                                            <span>Neo4j connection</span>
+                                        </div>
+                                        <div class="status-item">
+                                            <i class="fas fa-circle text-gray"></i>
+                                            <span>Data injection</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ERD Tab -->
+                        <div id="erd" class="tab-panel">
+                            <div class="panel-header">
+                                <h2><i class="fas fa-sitemap"></i> Entity Relationship Diagram</h2>
+                                <p>Generated ERD from your SQLite database</p>
+                            </div>
+                            <div class="content-area">
+                                <div id="erdContent" class="code-display">
+                                    <div class="placeholder">
+                                        <i class="fas fa-sitemap"></i>
+                                        <p>Generate ERD to view the database structure</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Schema Tab -->
+                        <div id="schema" class="tab-panel">
+                            <div class="panel-header">
+                                <h2><i class="fas fa-project-diagram"></i> Graph Schema</h2>
+                                <p>AI-generated graph schema for Neo4j</p>
+                            </div>
+                            <div class="content-area">
+                                <div id="schemaContent">
+                                    <div class="placeholder">
+                                        <i class="fas fa-project-diagram"></i>
+                                        <p>Generate schema to view the graph model</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q&A Tab -->
+                        <div id="qa" class="tab-panel">
+                            <div class="panel-header">
+                                <h2><i class="fas fa-comments"></i> Question & Answer System</h2>
+                                <p>Ask questions about your graph database</p>
+                            </div>
+                            <div class="qa-container">
+                                <div class="chat-history" id="chatHistory">
+                                    <div class="placeholder">
+                                        <i class="fas fa-comments"></i>
+                                        <p>Connect to Neo4j and inject data to start asking questions</p>
+                                    </div>
+                                </div>
+                                <div class="chat-input-container">
+                                    <div class="input-group">
+                                        <input type="text" id="questionInput" placeholder="Ask a question about your data..." disabled>
+                                        <button id="askQuestion" disabled>
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loadingText">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div id="notifications" class="notification-container"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

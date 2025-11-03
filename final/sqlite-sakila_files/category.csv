@@ -1,0 +1,17 @@
+category_id,name,last_update_year,last_update_month,last_update_day,last_update_hour,last_update_minute,last_update_second
+1,Action,2021,3,6,15,52,0
+2,Animation,2021,3,6,15,52,0
+3,Children,2021,3,6,15,52,0
+4,Classics,2021,3,6,15,52,0
+5,Comedy,2021,3,6,15,52,0
+6,Documentary,2021,3,6,15,52,0
+7,Drama,2021,3,6,15,52,0
+8,Family,2021,3,6,15,52,0
+9,Foreign,2021,3,6,15,52,0
+10,Games,2021,3,6,15,52,0
+11,Horror,2021,3,6,15,52,0
+12,Music,2021,3,6,15,52,0
+13,New,2021,3,6,15,52,0
+14,Sci-Fi,2021,3,6,15,52,0
+15,Sports,2021,3,6,15,52,0
+16,Travel,2021,3,6,15,52,0

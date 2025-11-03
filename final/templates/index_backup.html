@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GraphQL ERD & Q/A System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <h2>Controls</h2>
+        <form id="uploadForm">
+            <input type="file" name="sqlite_file" required />
+            <button type="submit">Upload & Set DB</button>
+        </form>
+        <button onclick="generateERD()">Generate ERD</button>
+        <hr>
+        <h3>Neo4j Connection</h3>
+        <input type="text" id="uri" placeholder="Graph URI"><br>
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button id="connectBtn">Connect</button>
+        <hr>
+        <button onclick="generateSchema()">Generate Schema</button>
+        <button onclick="injectNodes()">Inject Nodes</button>
+        <button onclick="injectRelationships()">Inject Relationships</button>
+        <hr>
+    </div>
+    <div class="main" id="mainContent">
+    <h2>Output</h2>
+
+    <div class="qa-box">
+    <h3>Q/A</h3>
+        <div id="qa-messages" class="qa-messages"></div>
+        <div class="qa-input">
+            <input type="text" id="question" placeholder="Enter your question">
+            <button onclick="queryGraph()">Ask</button>
+        </div>
+    </div>
+
+    <div id="output"></div>
+</div>
+</div>
+<script src="/static/script.js"></script>
+</body>
+</html>

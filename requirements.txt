@@ -1,0 +1,14 @@
+flask
+pandas
+psutil
+matplotlib
+langchain_google_genai
+google-genai
+google-generativeai
+neo4j
+langchain-neo4j
+python-dotenv
+langchain-groq
+graphviz
+pyvis
+langgraph
